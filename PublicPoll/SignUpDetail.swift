@@ -157,57 +157,7 @@ enum Age: String{
     case fifty = "50s~"
 }
 
-//라디오 버튼 커스텀 디자인
-struct RadioButton: View{
-    let id: String
-    let label: String
-    let size: CGFloat
-    let iconColor: Color
-    let textSize: CGFloat
-    let isMarked: Bool
-    let callback: (String)->()
-    
-    init(
-        id: String,
-        label: String,
-        size: CGFloat = 16,
-        iconColor: Color = Color("lavender"),
-        textSize: CGFloat = 14,
-        isMarked: Bool = false,
-        callback: @escaping (String)->()
-    ){
-        self.id = id
-        self.label = label
-        self.size = size
-        self.iconColor = iconColor
-        self.textSize = textSize
-        self.isMarked = isMarked
-        self.callback = callback
-    }
-    
-    var body: some View{
-        Button(action: {
-            self.callback(self.id)
-        }){
-            HStack(alignment: .center, spacing: 4){
-                Image(systemName: self.isMarked ?
-                      "largecircle.fill.circle" : "circle")
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: self.size, height: self.size)
-                .foregroundColor(self.iconColor)
-            
-                Text(label)
-                    .font(Font.system(size: textSize))
-                    .foregroundColor(Color("signupText"))
-                    .bold()
-                
-            }
-        }.foregroundColor(.white)
-            .frame(width: 80, alignment: .leading)
-    }
-}
+
 
 //성별 라디오 그룹
 struct GenderGroups: View{
@@ -226,6 +176,8 @@ struct GenderGroups: View{
         RadioButton(
             id: Gender.man.rawValue,
             label: Gender.man.rawValue,
+            width: 80,
+            textSize: 14,
             isMarked: selectedId == Gender.man.rawValue ? true : false,
             callback: radioGroupCallback)
     }
@@ -234,6 +186,8 @@ struct GenderGroups: View{
         RadioButton(
             id: Gender.woman.rawValue,
             label: Gender.woman.rawValue,
+            width: 80,
+            textSize: 14,
             isMarked: selectedId == Gender.woman.rawValue ? true : false,
             callback: radioGroupCallback)
     }
@@ -270,6 +224,8 @@ struct AgeGroups: View{
         RadioButton(
             id: Age.teen.rawValue,
             label: Age.teen.rawValue,
+            width: 80,
+            textSize: 14,
             isMarked: selectedId == Age.teen.rawValue ? true : false,
             callback: radioGroupCallback)
     }
@@ -278,6 +234,8 @@ struct AgeGroups: View{
         RadioButton(
             id: Age.twenty.rawValue,
             label: Age.twenty.rawValue,
+            width: 80,
+            textSize: 14,
             isMarked: selectedId == Age.twenty.rawValue ? true : false,
             callback: radioGroupCallback)
     }
@@ -286,6 +244,8 @@ struct AgeGroups: View{
         RadioButton(
             id: Age.thirty.rawValue,
             label: Age.thirty.rawValue,
+            width: 80,
+            textSize: 14,
             isMarked: selectedId == Age.thirty.rawValue ? true : false,
             callback: radioGroupCallback)
     }
@@ -294,6 +254,8 @@ struct AgeGroups: View{
         RadioButton(
             id: Age.firty.rawValue,
             label: Age.firty.rawValue,
+            width: 80,
+            textSize: 14,
             isMarked: selectedId == Age.firty.rawValue ? true : false,
             callback: radioGroupCallback)
     }
@@ -302,6 +264,8 @@ struct AgeGroups: View{
         RadioButton(
             id: Age.fifty.rawValue,
             label: Age.fifty.rawValue,
+            width: 80,
+            textSize: 14,
             isMarked: selectedId == Age.fifty.rawValue ? true : false,
             callback: radioGroupCallback)
     }

@@ -11,8 +11,9 @@ import Firebase
 struct Home: View {
     @State var isDrawerOpen: Bool = false
     @State var token: String = "no token"
+    @State var list = QuickRes()
     
-    @State var load = LoadQuickPoll()
+    @StateObject var load = LoadQuickPoll()
     
     var body: some View {
         GeometryReader{ geo in
@@ -34,15 +35,74 @@ struct Home: View {
                                 .padding(.top, 10)
                                 
                             VStack{
-                                getVotes()
+                                ScrollView(.horizontal, showsIndicators: false, content: {
+                                    HStack{
+                                        ForEach(load.res.data, id:\.self)  { data in
+                                            ZStack{
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .fill(Color.white)
+                                                    .frame(width: 300, height: 330)
+                                                VStack{
+                                                    Text(data.contents)
+                                                        .font(.system(size: 25))
+                                                        .frame(width: 230, alignment: .leading)
+                                                        .fixedSize(horizontal: false, vertical: true)
+                                                        .padding(.bottom, 30)
+                                                    Button(action: {
+                                                        let itemNum:[Int] = [1]
+                                                        print(token)
+                                                        load.quickVote(token: token, pollId: data.id, itemNum: itemNum)
+                                                        print(data.id)
+                                                    }) {
+                                                        Text(data.items[0].contents)
+                                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                                            .padding(.leading, 10)
+                                                            .foregroundColor(Color("signupText"))
+                                                            .font(.system(size: 15))
+                                                            .frame(width: 230, height: 40, alignment: .center)
+                                                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color(red: 0.704, green: 0.714, blue: 0.909), lineWidth: 4))
+                                                    }.cornerRadius(10)
+                                                        .padding(.bottom, 10)
+                                                        
+                                                    Button(action: {
+                                                        let itemNum:[Int] = [2]
+                                                        print(token)
+                                                        load.quickVote(token: token, pollId: data.id, itemNum: itemNum)
+                                                        
+                                                    }) {
+                                                        Text(data.items[1].contents)
+                                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                                            .padding(.leading, 10)
+                                                            .foregroundColor(Color("signupText"))
+                                                            .font(.system(size: 15))
+                                                            .frame(width: 230, height: 40, alignment: .center)
+                                                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color(red: 0.669, green: 0.739, blue: 0.929), lineWidth: 4))
+                                                    }.cornerRadius(10)
+                                                }
+                                            }.padding(.leading, 45)
+                                        }
+                                    }
+                                }).onAppear{
+                                    let currentUser = Auth.auth().currentUser
+                                    currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+                                      if let error = error {
+                                        print("error")
+                                      }
+                                        else{
+                                            token = idToken!
+                                            load.getPolls(token: token)
+                                        }
+                                        
+                                    }
+                                }
+                                .padding(.bottom, 10)
+                                    .padding(.top, 10)
                                 
                                 HStack{
                                     NavigationLink(destination: Text("Search"), label: {
-                                        Button(action: {
-                                            let itemNum:[Int] = [1]
-                                            print(token)
-                                            load.quickVote(token: token, pollId: 81, itemNum: itemNum)
-                                        }){
+                                        Button(action: {}){
                                             VStack{
                                                 Image("icon_search")
                                                     .resizable()
@@ -66,7 +126,7 @@ struct Home: View {
                                                 .font(.system(size: 12))
                                                 .foregroundColor(.gray)
                                         }
-                                            .frame(width: 140, height: 100)
+                                            .frame(width: 140, height: 100) 
                                             .background(.white)
                                             .cornerRadius(15)
                                             .padding(.leading, 10)
@@ -89,7 +149,7 @@ struct Home: View {
                                 }).padding(.bottom, 10)
                                 
                                 //create new vote
-                                NavigationLink(destination: Home(), label: {
+                                NavigationLink(destination: NewPoll(token: token), label: {
                                     HStack{
                                         Image("icon_edit")
                                             .resizable()
@@ -137,61 +197,7 @@ struct Home: View {
         }
     }
     
-    @ViewBuilder func getVotes() -> some View{
-        let currentUser = Auth.auth().currentUser
-        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-          if let error = error {
-            print("error")
-          }
-            else{
-                token = idToken!
-                var a = load.getPolls(token: token)
-            }
-            
-        }
-        
-        return ScrollView(.horizontal, showsIndicators: false, content: {
-            HStack{
-                ForEach(0..<10)  { _ in
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(Color.white)
-                            .frame(width: 300, height: 330)
-                        VStack{
-                            Text("How do you like tang shooook?")
-                                .font(.system(size: 25))
-                                .frame(width: 230, alignment: .leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.bottom, 30)
-                            Button(action: {}) {
-                                Text("Dip in Sauce")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, 10)
-                                    .foregroundColor(Color("signupText"))
-                                    .font(.system(size: 15))
-                                    .frame(width: 230, height: 40, alignment: .center)
-                                    .overlay(RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color(red: 0.704, green: 0.714, blue: 0.909), lineWidth: 4))
-                            }.cornerRadius(10)
-                                .padding(.bottom, 10)
-                                
-                            Button(action: {}) {
-                                Text("Pour souce")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, 10)
-                                    .foregroundColor(Color("signupText"))
-                                    .font(.system(size: 15))
-                                    .frame(width: 230, height: 40, alignment: .center)
-                                    .overlay(RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color(red: 0.669, green: 0.739, blue: 0.929), lineWidth: 4))
-                            }.cornerRadius(10)
-                        }
-                    }.padding(.leading, 45)
-                }
-            }
-        }).padding(.bottom, 10)
-            .padding(.top, 10)
-    }
+    
 }
 
 struct Home_Previews: PreviewProvider {

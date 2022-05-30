@@ -19,6 +19,10 @@
 		39D24BF9283BCB68003ECC35 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 39D24BF8283BCB68003ECC35 /* Alamofire */; };
 		39D24BFD283CD52F003ECC35 /* SignUpHTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24BFC283CD52F003ECC35 /* SignUpHTTP.swift */; };
 		39D24BFF28411567003ECC35 /* LoadQuickPoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24BFE28411567003ECC35 /* LoadQuickPoll.swift */; };
+		39D24C0128426412003ECC35 /* QuickItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24C0028426412003ECC35 /* QuickItem.swift */; };
+		39D24C032843BA0A003ECC35 /* NewPoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24C022843BA0A003ECC35 /* NewPoll.swift */; };
+		39D24C052843D063003ECC35 /* RadioCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24C042843D063003ECC35 /* RadioCustom.swift */; };
+		39D24C072844B033003ECC35 /* PickDeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24C062844B033003ECC35 /* PickDeadline.swift */; };
 		39D85EF32833506B00E1BCA6 /* PublicPollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D85EF22833506B00E1BCA6 /* PublicPollApp.swift */; };
 		39D85EF52833506B00E1BCA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D85EF42833506B00E1BCA6 /* ContentView.swift */; };
 		39D85EF72833507000E1BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39D85EF62833507000E1BCA6 /* Assets.xcassets */; };
@@ -59,6 +63,10 @@
 		39D24BE62839481B003ECC35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		39D24BFC283CD52F003ECC35 /* SignUpHTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpHTTP.swift; sourceTree = "<group>"; };
 		39D24BFE28411567003ECC35 /* LoadQuickPoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadQuickPoll.swift; sourceTree = "<group>"; };
+		39D24C0028426412003ECC35 /* QuickItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickItem.swift; sourceTree = "<group>"; };
+		39D24C022843BA0A003ECC35 /* NewPoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPoll.swift; sourceTree = "<group>"; };
+		39D24C042843D063003ECC35 /* RadioCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioCustom.swift; sourceTree = "<group>"; };
+		39D24C062844B033003ECC35 /* PickDeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDeadline.swift; sourceTree = "<group>"; };
 		39D85EEF2833506B00E1BCA6 /* PublicPoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PublicPoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D85EF22833506B00E1BCA6 /* PublicPollApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicPollApp.swift; sourceTree = "<group>"; };
 		39D85EF42833506B00E1BCA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -168,6 +176,10 @@
 				39D85F2A2836B2E700E1BCA6 /* Drawer.swift */,
 				39D24BFC283CD52F003ECC35 /* SignUpHTTP.swift */,
 				39D24BFE28411567003ECC35 /* LoadQuickPoll.swift */,
+				39D24C0028426412003ECC35 /* QuickItem.swift */,
+				39D24C022843BA0A003ECC35 /* NewPoll.swift */,
+				39D24C042843D063003ECC35 /* RadioCustom.swift */,
+				39D24C062844B033003ECC35 /* PickDeadline.swift */,
 			);
 			path = PublicPoll;
 			sourceTree = "<group>";
@@ -464,10 +476,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39D24C072844B033003ECC35 /* PickDeadline.swift in Sources */,
 				39D24BFF28411567003ECC35 /* LoadQuickPoll.swift in Sources */,
 				39D85EF52833506B00E1BCA6 /* ContentView.swift in Sources */,
+				39D24C0128426412003ECC35 /* QuickItem.swift in Sources */,
 				39D24BFD283CD52F003ECC35 /* SignUpHTTP.swift in Sources */,
+				39D24C032843BA0A003ECC35 /* NewPoll.swift in Sources */,
 				39D85F232833C98C00E1BCA6 /* SignUp.swift in Sources */,
+				39D24C052843D063003ECC35 /* RadioCustom.swift in Sources */,
 				39D85F272834001000E1BCA6 /* SignUpDetail.swift in Sources */,
 				39D85EF32833506B00E1BCA6 /* PublicPollApp.swift in Sources */,
 				39D85F2928363ABB00E1BCA6 /* Home.swift in Sources */,
