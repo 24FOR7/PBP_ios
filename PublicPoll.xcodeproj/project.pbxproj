@@ -23,6 +23,7 @@
 		39D24C032843BA0A003ECC35 /* NewPoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24C022843BA0A003ECC35 /* NewPoll.swift */; };
 		39D24C052843D063003ECC35 /* RadioCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24C042843D063003ECC35 /* RadioCustom.swift */; };
 		39D24C072844B033003ECC35 /* PickDeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D24C062844B033003ECC35 /* PickDeadline.swift */; };
+		39D24C0A2845132F003ECC35 /* WSTagsField in Frameworks */ = {isa = PBXBuildFile; productRef = 39D24C092845132F003ECC35 /* WSTagsField */; };
 		39D85EF32833506B00E1BCA6 /* PublicPollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D85EF22833506B00E1BCA6 /* PublicPollApp.swift */; };
 		39D85EF52833506B00E1BCA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D85EF42833506B00E1BCA6 /* ContentView.swift */; };
 		39D85EF72833507000E1BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39D85EF62833507000E1BCA6 /* Assets.xcassets */; };
@@ -105,6 +106,7 @@
 				39D24BF028394EE1003ECC35 /* FirebaseFirestore in Frameworks */,
 				39D24BF628394EE1003ECC35 /* FirebaseStorage in Frameworks */,
 				39D24BEE28394EE1003ECC35 /* FirebaseAuth in Frameworks */,
+				39D24C0A2845132F003ECC35 /* WSTagsField in Frameworks */,
 				39D24BF228394EE1003ECC35 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +251,7 @@
 				39D24BF328394EE1003ECC35 /* FirebaseFunctions */,
 				39D24BF528394EE1003ECC35 /* FirebaseStorage */,
 				39D24BF8283BCB68003ECC35 /* Alamofire */,
+				39D24C092845132F003ECC35 /* WSTagsField */,
 			);
 			productName = PublicPoll;
 			productReference = 39D85EEF2833506B00E1BCA6 /* PublicPoll.app */;
@@ -328,6 +331,7 @@
 			packageReferences = (
 				39D24BE828394EE1003ECC35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				39D24BF7283BCB68003ECC35 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				39D24C082845132F003ECC35 /* XCRemoteSwiftPackageReference "WSTagsField" */,
 			);
 			productRefGroup = 39D85EF02833506B00E1BCA6 /* Products */;
 			projectDirPath = "";
@@ -833,6 +837,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		39D24C082845132F003ECC35 /* XCRemoteSwiftPackageReference "WSTagsField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/whitesmith/WSTagsField";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -875,6 +887,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 39D24BF7283BCB68003ECC35 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		39D24C092845132F003ECC35 /* WSTagsField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39D24C082845132F003ECC35 /* XCRemoteSwiftPackageReference "WSTagsField" */;
+			productName = WSTagsField;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

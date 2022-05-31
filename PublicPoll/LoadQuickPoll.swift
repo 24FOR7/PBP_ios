@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 
+
 class LoadQuickPoll: ObservableObject{
     @Published var authenticated = false
     @Published var res:QuickRes = QuickRes()
@@ -109,6 +110,52 @@ class LoadQuickPoll: ObservableObject{
                                 return
                             }
                             print("투표가 성공적으로 완료되었습니다!")
+                
+                            
+                            
+        }.resume()
+    }
+    
+    func makeBallot(token: String, hashTags: [String], contents: String, endTime: String, isPublic: Bool, showNick: Bool, canRevote: Bool, canComment: Bool, isSingleVote: Bool, one: String, two: String){
+        guard let url = URL(string: "http://13.209.119.116:8080/poll/add") else { return}
+        
+        let body: [String: Any] = ["contents": contents, "hashTags": hashTags, "endTime": endTime, "hasImage": false, "isPublic": isPublic, "showNick": showNick, "canRevote": canRevote, "canComment": canComment, "isSingleVote": isSingleVote]
+            
+            let finalBody = try! JSONSerialization.data(withJSONObject: body)
+            print(body)
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = finalBody
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(token, forHTTPHeaderField: "Authorization")
+
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                //1. 데이터 확인
+                            guard let data = data else {
+                                print("데이터가 존재하지 않습니다.")
+                                return
+                            }
+                            
+                            //2. 오류 확인
+                            guard error == nil else {
+                                print("오류 : \(String(describing: error))")
+                                return
+                            }
+                            
+                            //3. http응답을 받음
+                            guard let response = response as? HTTPURLResponse else {
+                                print("잘못된 응답입니다.")
+                                return
+                            }
+                            
+                            //4. 응답 상태
+                            //Successful response = 200 ~ 299
+                            guard response.statusCode >= 200 && response.statusCode < 300 else {
+                                print("Status Code는 2xx이 되야 합니다. 현재 Status Code는 \(response.statusCode) 입니다.")
+                                return
+                            }
+                            print("새 투표가 추가되었습니다.")
                 
                             
                             

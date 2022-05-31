@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import WSTagsField
 
 struct NewPoll: View {
+    @StateObject var load = LoadQuickPoll()
     let token:String
     @State var content:String = ""
     @State var isPublic:Bool = true
@@ -15,6 +17,26 @@ struct NewPoll: View {
     @State var canRevote:Bool = true
     @State var canComment:Bool = true
     @State var isSingleVote:Bool = true
+    @State var one:String = ""
+    @State var two:String = ""
+    @State var text:String = ""
+    @State var tags:[[Tag]] = [[]]
+    
+    //2007-12-03T10:15:30
+    let dateformat: DateFormatter = {
+        let formatter  = DateFormatter()
+        formatter.dateFormat = "YYYY-M-d"
+        return formatter
+    }()
+    let hourformat: DateFormatter = {
+        let formatter  = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        return formatter
+    }()
+    @State var selectedDate: Date = Date()
+    let endingDate: Date = Calendar.current.date(from: DateComponents(year:2023)) ?? Date()
+    let startingDate: Date = Date()
+    @State var date2String = ""
     
     var body: some View {
         ScrollView{
@@ -48,15 +70,31 @@ struct NewPoll: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     ZStack{
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(height: 145)
-                            .foregroundColor(Color("deepGray"))
+                            .frame(height: 100)
+                            .foregroundColor(Color("efefef"))
                         
                         VStack{
                             HStack{
+                                Text("1")
+                                    .bold()
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color("signupText"))
+                                    .padding(.trailing, 5)
                                 
+                                TextField("", text: $one)
+                                    .frame(width: 250.0)
+                                    .textFieldStyle(.roundedBorder)
                             }
                             HStack{
+                                Text("2")
+                                    .bold()
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color("signupText"))
+                                    .padding(.trailing, 5)
                                 
+                                TextField("", text: $two)
+                                    .frame(width: 250.0)
+                                    .textFieldStyle(.roundedBorder)
                             }
                         }
                     }.padding(.bottom, 20)
@@ -69,12 +107,69 @@ struct NewPoll: View {
                         .font(.system(size: 15))
                         .foregroundColor(Color("signupText"))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    TextEditor(text: $content)
-                        .frame(height: 80)
-                        .cornerRadius(10)
-                        .shadow(radius: 1)
-                        .padding(.bottom, 20)
-                }
+                    
+                    HStack{
+                        TextEditor(text: $text)
+                            .frame(width: 260, height: 30)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                        Button(action: {
+                            withAnimation(.default){
+                                tags[tags.count - 1].append(Tag(tagText: text))
+                                text = ""
+                            }
+                        }) {
+                            Image(systemName: "plus.app")
+                                .font(.largeTitle)
+                                .frame(width: 30, height: 30, alignment: .center)
+                                .foregroundColor(Color("lavender"))
+                        }.disabled(text == "")
+                            .opacity(text == "" ? 0.45 : 1)
+                    }
+                    
+                    VStack{
+                        ForEach(tags.indices, id:\.self){index in
+                            HStack{
+                                ForEach(tags[index].indices, id:\.self){tagIndex in
+                                    Text(tags[index][tagIndex].tagText)
+                                        .font(.system(size: 12))
+                                        .padding(.vertical, 6)
+                                        .padding(.horizontal)
+                                        //.foregroundColor(.white)
+                                        .background(Color("lavender"))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(15)
+                                        .overlay(RoundedRectangle(cornerRadius: 15)
+                                            .stroke(Color("lavender")))
+                                        .lineLimit(1)
+                                        .overlay(
+                                            GeometryReader{reader -> Color in
+                                                let maxX = reader.frame(in: .global).maxX
+                                                if maxX > UIScreen.main.bounds.width - 60 && !tags[index][tagIndex].isExceeded{
+                                                    DispatchQueue.main.async {
+                                                        tags[index][tagIndex].isExceeded = true
+                                                        let lastItem = tags[index][tagIndex]
+                                                        
+                                                        tags.append([lastItem])
+                                                        tags[index].remove(at: tagIndex)
+                                                    }
+                                                }
+                                                
+                                                return Color.clear
+                                            }).clipShape(RoundedRectangle(cornerRadius: 15))
+                                        .onTapGesture{
+                                            tags[index].remove(at: tagIndex)
+                                            
+                                            if tags[index].isEmpty{
+                                                tags.remove(at: index)
+                                            }
+                                        }
+                                }
+                            }
+                        }
+                    }
+                    .frame(width: UIScreen.main.bounds.width - 100, height: 60, alignment: .topLeading)
+                }.padding(.bottom, 20)
                 
                 //deadline
                 VStack{
@@ -83,8 +178,15 @@ struct NewPoll: View {
                         .font(.system(size: 15))
                         .foregroundColor(Color("signupText"))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    PickDeadline().frame(maxWidth: .infinity, alignment: .center)
-                }
+                    
+                    DatePicker("", selection: $selectedDate, in: startingDate...endingDate, displayedComponents: [.date, .hourAndMinute])
+                        .accentColor(Color("lavender"))
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .labelsHidden()
+                        .environment(\.locale, Locale.init(identifier: "en"))
+                        .transformEffect(.init(scaleX: 0.8, y: 0.8))
+                        .padding(.leading, 40)
+                }.padding(.bottom, 20)
                 
                 VStack(spacing: 10){
                     Text("Properties")
@@ -97,7 +199,7 @@ struct NewPoll: View {
                         switch selected {
                         case "public":
                             isPublic = true
-                        case "Woman":
+                        case "private":
                             isPublic = false
                         default:
                             break
@@ -107,9 +209,9 @@ struct NewPoll: View {
                     
                     NickGroups{ selected in
                         switch selected {
-                        case "show nickName":
+                        case "show nickname":
                             showNick = true
-                        case "hide nickName":
+                        case "hide nickname":
                             showNick = false
                         default:
                             break
@@ -155,7 +257,23 @@ struct NewPoll: View {
                 }.padding(.bottom, 30)
                 
                 NavigationLink(destination: Home().navigationBarBackButtonHidden(true), label: {
-                    Button(action: {}){
+                    Button(action: {
+                        //deadline Date to String
+                        date2String = dateformat.string(from: selectedDate) + "T" + hourformat.string(from: selectedDate) + "."
+                        
+                        print(token)
+                        print(content)
+                        print(one)
+                        print(two)
+                        print(isPublic)
+                        print(showNick)
+                        print(canRevote)
+                        print(canComment)
+                        print(isSingleVote)
+                        print(date2String)
+                        
+                        load.makeBallot(token: token, hashTags: ["test"], contents: content, endTime: date2String, isPublic: isPublic, showNick: showNick, canRevote: canRevote, canComment: canComment, isSingleVote: isSingleVote, one: one, two: two)
+                    }){
                         Text("Done")
                             .frame(width: 250, height: 60, alignment: .center)
                             .background(Color("lavender"))
@@ -168,6 +286,12 @@ struct NewPoll: View {
                 .padding(.trailing, 50)
         }
     }
+}
+
+struct Tag: Identifiable{
+    var id = UUID().uuidString
+    var tagText: String
+    var isExceeded = false
 }
 
 enum Private: String{

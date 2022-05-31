@@ -18,6 +18,8 @@ struct PickDeadline: View {
             .datePickerStyle(CompactDatePickerStyle())
             .labelsHidden()
             .environment(\.locale, Locale.init(identifier: "en"))
+            .transformEffect(.init(scaleX: 0.8, y: 0.8))
+            
     }
 }
 
