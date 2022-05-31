@@ -25,7 +25,7 @@ struct NewPoll: View {
     //2007-12-03T10:15:30
     let dateformat: DateFormatter = {
         let formatter  = DateFormatter()
-        formatter.dateFormat = "YYYY-M-d"
+        formatter.dateFormat = "YYYY-MM-dd"
         return formatter
     }()
     let hourformat: DateFormatter = {
@@ -259,7 +259,7 @@ struct NewPoll: View {
                 NavigationLink(destination: Home().navigationBarBackButtonHidden(true), label: {
                     Button(action: {
                         //deadline Date to String
-                        date2String = dateformat.string(from: selectedDate) + "T" + hourformat.string(from: selectedDate) + "."
+                        date2String = dateformat.string(from: selectedDate) + "T" + hourformat.string(from: selectedDate)
                         
                         print(token)
                         print(content)
@@ -272,7 +272,7 @@ struct NewPoll: View {
                         print(isSingleVote)
                         print(date2String)
                         
-                        load.makeBallot(token: token, hashTags: ["test"], contents: content, endTime: date2String, isPublic: isPublic, showNick: showNick, canRevote: canRevote, canComment: canComment, isSingleVote: isSingleVote, one: one, two: two)
+                        load.makeBallot(token: token, hashTags: ["test","hello"], contents: content, endTime: date2String, isPublic: isPublic, showNick: showNick, canRevote: canRevote, canComment: canComment, isSingleVote: isSingleVote, one: one, two: two)
                     }){
                         Text("Done")
                             .frame(width: 250, height: 60, alignment: .center)

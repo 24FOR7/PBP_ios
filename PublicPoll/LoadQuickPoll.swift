@@ -8,7 +8,11 @@ import Foundation
 import SwiftUI
 import Combine
 
-
+struct Item: Codable{
+    var contents: String
+    var itemNum: Int
+    var hasImage: Bool
+}
 
 class LoadQuickPoll: ObservableObject{
     @Published var authenticated = false
@@ -109,17 +113,24 @@ class LoadQuickPoll: ObservableObject{
                                 print("Status Code는 2xx이 되야 합니다. 현재 Status Code는 \(response.statusCode) 입니다.")
                                 return
                             }
-                            print("투표가 성공적으로 완료되었습니다!")
-                
-                            
-                            
+                            let jsonString = String(data: data, encoding: .utf8)
+                            print(jsonString)
         }.resume()
     }
     
     func makeBallot(token: String, hashTags: [String], contents: String, endTime: String, isPublic: Bool, showNick: Bool, canRevote: Bool, canComment: Bool, isSingleVote: Bool, one: String, two: String){
         guard let url = URL(string: "http://13.209.119.116:8080/poll/add") else { return}
+        let item1: Item = .init(contents: one, itemNum: 1, hasImage: false)
+        let item2: Item = .init(contents: two, itemNum: 2, hasImage: false)
+        let itm1 = try? JSONEncoder().encode(item1)
+        let itm2 = try? JSONEncoder().encode(item2)
+        if let jsonData = itm1, let jsonString = String(data:itm1!, encoding: .utf8){
+            print(jsonString)
+        }
         
-        let body: [String: Any] = ["contents": contents, "hashTags": hashTags, "endTime": endTime, "hasImage": false, "isPublic": isPublic, "showNick": showNick, "canRevote": canRevote, "canComment": canComment, "isSingleVote": isSingleVote]
+        
+        
+        let body: [String: Any] = ["contents": contents, "hashTags": hashTags, "endTime": endTime, "hasImage": false, "isPublic": isPublic, "showNick": showNick, "canRevote": canRevote, "canComment": canComment, "isSingleVote": isSingleVote, "items":[itm1,itm2]]
             
             let finalBody = try! JSONSerialization.data(withJSONObject: body)
             print(body)
@@ -155,6 +166,9 @@ class LoadQuickPoll: ObservableObject{
                                 print("Status Code는 2xx이 되야 합니다. 현재 Status Code는 \(response.statusCode) 입니다.")
                                 return
                             }
+                //data를 문자열로 변환해줘야 합니다.
+                let jsonString = String(data: data, encoding: .utf8)
+                print(jsonString)
                             print("새 투표가 추가되었습니다.")
                 
                             

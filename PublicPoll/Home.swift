@@ -14,6 +14,7 @@ struct Home: View {
     @State var list = QuickRes()
     
     @StateObject var load = LoadQuickPoll()
+    @State var boolList = [0,0,0,0,0,0,0,0,0,0,0,0]
     
     var body: some View {
         GeometryReader{ geo in
@@ -50,9 +51,7 @@ struct Home: View {
                                                         .padding(.bottom, 30)
                                                     Button(action: {
                                                         let itemNum:[Int] = [1]
-                                                        print(token)
                                                         load.quickVote(token: token, pollId: data.id, itemNum: itemNum)
-                                                        print(data.id)
                                                     }) {
                                                         Text(data.items[0].contents)
                                                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,12 +61,12 @@ struct Home: View {
                                                             .frame(width: 230, height: 40, alignment: .center)
                                                             .overlay(RoundedRectangle(cornerRadius: 10)
                                                                 .stroke(Color(red: 0.704, green: 0.714, blue: 0.909), lineWidth: 4))
+                                                            .background(.white)
                                                     }.cornerRadius(10)
                                                         .padding(.bottom, 10)
                                                         
                                                     Button(action: {
                                                         let itemNum:[Int] = [2]
-                                                        print(token)
                                                         load.quickVote(token: token, pollId: data.id, itemNum: itemNum)
                                                         
                                                     }) {
