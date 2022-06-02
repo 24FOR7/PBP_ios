@@ -120,17 +120,11 @@ class LoadQuickPoll: ObservableObject{
     
     func makeBallot(token: String, hashTags: [String], contents: String, endTime: String, isPublic: Bool, showNick: Bool, canRevote: Bool, canComment: Bool, isSingleVote: Bool, one: String, two: String){
         guard let url = URL(string: "http://13.209.119.116:8080/poll/add") else { return}
-        let item1: Item = .init(contents: one, itemNum: 1, hasImage: false)
-        let item2: Item = .init(contents: two, itemNum: 2, hasImage: false)
-        let itm1 = try? JSONEncoder().encode(item1)
-        let itm2 = try? JSONEncoder().encode(item2)
-        if let jsonData = itm1, let jsonString = String(data:itm1!, encoding: .utf8){
-            print(jsonString)
-        }
+        let item1:[String:Any] = ["contents": one, "itemNum":1, "hasImage":false]
+        let item2:[String:Any] = ["contents": two, "itemNum":2, "hasImage":false]
         
         
-        
-        let body: [String: Any] = ["contents": contents, "hashTags": hashTags, "endTime": endTime, "hasImage": false, "isPublic": isPublic, "showNick": showNick, "canRevote": canRevote, "canComment": canComment, "isSingleVote": isSingleVote, "items":[itm1,itm2]]
+        let body: [String: Any] = ["contents": contents, "hashTags": hashTags, "endTime": endTime, "hasImage": false, "isPublic": isPublic, "showNick": showNick, "canRevote": canRevote, "canComment": canComment, "isSingleVote": isSingleVote, "items":[item1,item2]]
             
             let finalBody = try! JSONSerialization.data(withJSONObject: body)
             print(body)
