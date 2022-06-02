@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		186B3AA6D1BCF215023EF2E4 /* Pods_PublicPollTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD4A862C123F8313B5DFD561 /* Pods_PublicPollTests.framework */; };
+		398F159F2849087D00F6FC16 /* ScrollViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398F159E2849087D00F6FC16 /* ScrollViewItem.swift */; };
 		39D24BE72839481B003ECC35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39D24BE62839481B003ECC35 /* GoogleService-Info.plist */; };
 		39D24BEA28394EE1003ECC35 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 39D24BE928394EE1003ECC35 /* FirebaseAnalytics */; };
 		39D24BEC28394EE1003ECC35 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 39D24BEB28394EE1003ECC35 /* FirebaseAnalyticsSwift */; };
@@ -61,6 +62,7 @@
 /* Begin PBXFileReference section */
 		03187DC7346893FFEAB52041 /* Pods-PublicPoll-PublicPollUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PublicPoll-PublicPollUITests.release.xcconfig"; path = "Target Support Files/Pods-PublicPoll-PublicPollUITests/Pods-PublicPoll-PublicPollUITests.release.xcconfig"; sourceTree = "<group>"; };
 		16951806A9B3E7E0DB3F7385 /* Pods_PublicPoll_PublicPollUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PublicPoll_PublicPollUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		398F159E2849087D00F6FC16 /* ScrollViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewItem.swift; sourceTree = "<group>"; };
 		39D24BE62839481B003ECC35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		39D24BFC283CD52F003ECC35 /* SignUpHTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpHTTP.swift; sourceTree = "<group>"; };
 		39D24BFE28411567003ECC35 /* LoadQuickPoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadQuickPoll.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				39D24C022843BA0A003ECC35 /* NewPoll.swift */,
 				39D24C042843D063003ECC35 /* RadioCustom.swift */,
 				39D24C062844B033003ECC35 /* PickDeadline.swift */,
+				398F159E2849087D00F6FC16 /* ScrollViewItem.swift */,
 			);
 			path = PublicPoll;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			files = (
 				39D24C072844B033003ECC35 /* PickDeadline.swift in Sources */,
 				39D24BFF28411567003ECC35 /* LoadQuickPoll.swift in Sources */,
+				398F159F2849087D00F6FC16 /* ScrollViewItem.swift in Sources */,
 				39D85EF52833506B00E1BCA6 /* ContentView.swift in Sources */,
 				39D24C0128426412003ECC35 /* QuickItem.swift in Sources */,
 				39D24BFD283CD52F003ECC35 /* SignUpHTTP.swift in Sources */,

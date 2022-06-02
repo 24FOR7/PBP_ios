@@ -65,13 +65,16 @@ struct Stats: Hashable,Codable{
 }
 
 struct VoteReturn: Codable {
-    let statusCode: Int
-    let resMessage: String
-    let data: [VoteReturnData]
+    var statusCode: Int = 0
+    var resMessage: String = ""
+    var data: [VoteReturnData] = [VoteReturnData(),VoteReturnData()]
 }
 
 struct VoteReturnData: Codable {
-    let itemNum, optionTotalCnt, optionItemCnt, percent: Int
-    let isBest: Bool
+    var itemNum: Int = 0
+    var optionTotalCnt: Int = 0
+    var optionItemCnt: Int = 0
+    var percent: Float = 0.0
+    var isBest: Bool = true
 }
 

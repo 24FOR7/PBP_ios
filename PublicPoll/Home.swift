@@ -39,48 +39,7 @@ struct Home: View {
                                 ScrollView(.horizontal, showsIndicators: false, content: {
                                     HStack{
                                         ForEach(load.res.data, id:\.self)  { data in
-                                            ZStack{
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .fill(Color.white)
-                                                    .frame(width: 300, height: 330)
-                                                VStack{
-                                                    Text(data.contents)
-                                                        .font(.system(size: 25))
-                                                        .frame(width: 230, alignment: .leading)
-                                                        .fixedSize(horizontal: false, vertical: true)
-                                                        .padding(.bottom, 30)
-                                                    Button(action: {
-                                                        let itemNum:[Int] = [1]
-                                                        load.quickVote(token: token, pollId: data.id, itemNum: itemNum)
-                                                    }) {
-                                                        Text(data.items[0].contents)
-                                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                                            .padding(.leading, 10)
-                                                            .foregroundColor(Color("signupText"))
-                                                            .font(.system(size: 15))
-                                                            .frame(width: 230, height: 40, alignment: .center)
-                                                            .overlay(RoundedRectangle(cornerRadius: 10)
-                                                                .stroke(Color(red: 0.704, green: 0.714, blue: 0.909), lineWidth: 4))
-                                                            .background(.white)
-                                                    }.cornerRadius(10)
-                                                        .padding(.bottom, 10)
-                                                        
-                                                    Button(action: {
-                                                        let itemNum:[Int] = [2]
-                                                        load.quickVote(token: token, pollId: data.id, itemNum: itemNum)
-                                                        
-                                                    }) {
-                                                        Text(data.items[1].contents)
-                                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                                            .padding(.leading, 10)
-                                                            .foregroundColor(Color("signupText"))
-                                                            .font(.system(size: 15))
-                                                            .frame(width: 230, height: 40, alignment: .center)
-                                                            .overlay(RoundedRectangle(cornerRadius: 10)
-                                                                .stroke(Color(red: 0.669, green: 0.739, blue: 0.929), lineWidth: 4))
-                                                    }.cornerRadius(10)
-                                                }
-                                            }.padding(.leading, 45)
+                                            ScrollViewItem(token: token, content: data.contents, id: data.id, btn1Content: data.items[0].contents, btn2Content: data.items[1].contents)
                                         }
                                     }
                                 }).onAppear{
@@ -192,12 +151,10 @@ struct Home: View {
                                 .resizable()
                                 .frame(width: 30, height: 23)
                         })
-            
         }
     }
-    
-    
 }
+
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
