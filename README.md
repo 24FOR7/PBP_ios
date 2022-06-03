@@ -26,7 +26,7 @@
  </p>
 </br></br></br>
  
-## Home Page
+## Vote which you like
  <p align="center">
 <img width="250" alt="image" src="https://user-images.githubusercontent.com/78309388/171859865-ce184063-d924-4737-a1d1-1d3ef63a8f2e.png">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -34,15 +34,13 @@
  </p>
  </br></br></br>
   
-## Vote which you like
+## Create new Vote
  <p align="center">
 <img width="250" alt="image" src="https://user-images.githubusercontent.com/78309388/171861063-0f883228-7765-4f3a-86b2-5d6ddd921b9d.png">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img width="250" alt="image" src="https://user-images.githubusercontent.com/78309388/171861095-b5d9e700-0674-4955-aeae-96d6e90517cf.png">
  </p>
-  </br></br></br>
  
-## Create new Vote
  <p align="center">
 <img width="250" alt="image" src="https://user-images.githubusercontent.com/78309388/171861146-34ce5d99-9334-42a4-960d-fc5919b92054.png">
       &nbsp;&nbsp;
