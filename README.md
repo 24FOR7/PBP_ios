@@ -1,5 +1,5 @@
 # PBP_ios
-Public Poll Application for 🍎IOS🍏 using SwiftUI
+🍎Public Poll Application for IOS using SwiftUI🍏
 
 ## Splash & Main Page
 <p align="center">
